@@ -15,6 +15,10 @@ public class ProductRepositoryImpl {
 	private ProductRepository productRepository;
 	
 	public List<Product> getAllProduct(){
-		return productRepository.findAll();
+		return this.productRepository.findAll();
+	}
+	
+	public Product saveProduct(Product product) {
+		return this.productRepository.save(product);
 	}
 }
