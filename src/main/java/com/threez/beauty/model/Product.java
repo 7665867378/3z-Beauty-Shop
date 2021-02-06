@@ -1,12 +1,16 @@
 package com.threez.beauty.model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
+import com.threez.beauty.enums.Unit;
+
+@Entity(name = "Product")
 @Table(name="product")
 public class Product {
 	@Id
@@ -15,14 +19,14 @@ public class Product {
 	private Integer sku;
 	private String name;
 	private String description;
-	private String unit;
+	@Enumerated(EnumType.STRING)
+	private Unit unit;
 	private Double unitPrice;
 	private Double weight;
 	private Double size;
 	private String image;
 	private String thumbnail;
 	private Integer stock;
-	
 	
 	public Product() {
 		super();
@@ -52,10 +56,10 @@ public class Product {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getUnit() {
+	public Unit getUnit() {
 		return unit;
 	}
-	public void setUnit(String unit) {
+	public void setUnit(Unit unit) {
 		this.unit = unit;
 	}
 	public Double getUnitPrice() {

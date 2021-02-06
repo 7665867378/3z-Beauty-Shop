@@ -10,31 +10,36 @@
 	rel="stylesheet">
 <script th:src="@{/libs/jquery/jquery-3.5.1.min.js}"></script>
 <style type="text/css">
-	body p {
-		font-size: 14px;
-	}
-	.btn-primary{
-		background: #f5a8a8;
-		border-color: #f5a8a8;
-	}
-	.btn-primary:hover, .btn-primary:active{
-		background: #ffffff;
-		color: #f5a8a8;
-		border-color: #f5a8a8;
-	}
-	.product-gallery .card{
-		overflow: hidden;
-	}
-	.product-gallery .card-text {
-	    word-wrap: break-word;
-	}
+body {
+	font-size: 1.1rem !important;
+}
+
+.btn-primary {
+	background: #f5a8a8;
+	border-color: #f5a8a8;
+}
+
+.btn-primary:hover, .btn-primary:active {
+	background: #ffffff;
+	color: #f5a8a8;
+	border-color: #f5a8a8;
+}
+
+.product-gallery .card {
+	overflow: hidden;
+}
+
+.product-gallery .card-text {
+	word-wrap: break-word;
+}
 </style>
 </head>
 
 <body>
 	<section>
 		<nav class="navbar navbar-expand-lg navbar-light bg-white">
-			<a class="navbar-brand" href="#">Navbar</a>
+			<a class="navbar-brand text-uppercase" href="#">3'z Beautity
+				Botique</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarNav" aria-controls="navbarNav"
 				aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +66,7 @@
 				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
 				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 			</ol>
-			<div class="carousel-inner" style="max-height: 100vh;">
+			<div class="carousel-inner" style="max-height: 60vh;">
 				<div class="carousel-item active">
 					<img class="d-block mx-auto h-100 w-100"
 						th:src="@{/images/image-banner-1.jpg}" alt="First slide">
@@ -80,13 +85,16 @@
 
 	<section class="container-fluid p-5">
 		<div class="row">
-			<div class="col-xs-4 col-md-3 p-3 product-gallery" th:each="product : ${productList}">
+			<div class="col-xs-4 col-md-3 p-3 product-gallery"
+				th:each="product : ${productList}">
 				<div class="card mx-auto ">
 					<img class="card-img-top" src="..." alt="Card image cap">
 					<div class="card-body">
 						<h5 class="card-title" th:text="${product.name}"></h5>
-						<h6 class="card-subtitle text-muted" th:text="Php + ${ product.unitPrice}"></h6>
-						<a href="#" class="btn btn-primary stretched-link">Go somewhere</a>
+						<h6 class="card-subtitle text-muted"
+							th:text="Php + ${ product.unitPrice}"></h6>
+						<a href="#" class="btn btn-primary stretched-link">Go
+							somewhere</a>
 					</div>
 				</div>
 			</div>
@@ -95,7 +103,8 @@
 
 	<section class="container-fluid" style="min-height: 100vh;">
 		<div class="row" style="min-height: inherit;">
-			<div class="col-md-6 p-5 text-light" style="background: #fab7b7;">
+			<div class="col-md-6 p-5 text-light flex-xs-middle"
+				style="background: #fab7b7;">
 				<h1>Body Care</h1>
 				<p1>Lorem Ipsum is simply dummy text of the printing and
 				typesetting industry. Lorem Ipsum has been the industry's standard
@@ -106,8 +115,7 @@
 				the 1960s with the release of Letraset sheets containing Lorem Ipsum
 				passages, and more recently with desktop publishing software like
 				Aldus PageMaker including versions of Lorem Ipsum</p1>
-				<br>
-				<button class="btn btn-outline-light">Learn more</button>
+				<br> <a class="btn btn-outline-light" href="#">Learn more</a>
 			</div>
 			<div class="col-md-6"
 				style="background: url(/images/image-banner-bodywash.jpg); background-size: cover; background-repeat: no-repeat;">
@@ -115,22 +123,65 @@
 		</div>
 	</section>
 
-	<h1>Hello World</h1>
-	<p th:text="'Hello, ' + ${productList[1]} + '!'" />
+	<section>
+		<div class="container" >
+			<div class="row my-auto">
+				<div class="col-md-4 my-auto text-center  " style="min-height: 100vh;">
+					<img style="border-radius: 50%;" width="200px" height="200px"
+						alt="" th:src="@{/images/image-banner-bodywash.jpg}">
+					<h2>Facial</h2>
+					<p>Lorem Ipsum is simply dummy text of the printing and
+						typesetting industry.
+					<hr style="width: 75%;">
+					<a class="btn btn-outline-dark" href="#">Learn more</a>
+				</div>
 
-	<form class="col-md-5" action="/product/add">
-
-		<div class="form-group">
-			<label>Name</label> <small class="text-muted">Please input
-				product name</small> <input class="form-control" name="name" type="text">
+				<div class="col-md-4 my-auto text-center ">
+					<img style="border-radius: 50%;" width="200px" height="200px"
+						alt="" th:src="@{/images/image-banner-bodywash.jpg}">
+					<h2>Facial</h2>
+					<p>Lorem Ipsum is simply dummy text of the printing and
+						typesetting industry.
+					<hr style="width: 75%;">
+					<a class="btn btn-outline-dark" href="#">Learn more</a>
+				</div>
+				<div class="col-md-4 my-auto text-center ">
+					<img style="border-radius: 50%;" width="200px" height="200px"
+						alt="" th:src="@{/images/image-banner-bodywash.jpg}">
+					<h2>Facial</h2>
+					<p>Lorem Ipsum is simply dummy text of the printing and
+						typesetting industry.
+					<hr style="width: 75%;">
+					<a class="btn btn-outline-dark" href="#">Learn more</a>
+				</div>
+			</div>
 		</div>
-		<div class="form-group">
-			<label>sku</label> <small class="text-muted">Please input SKU</small>
-			<input class="form-control" name="sku" type="number">
-		</div>
+	</section>
 
-		<button class="btn btn-primary" type="submit">Submit</button>
+	<form th:action="@{/product/add}" method="POST" >
+		<div class="form-group">
+			<label for="exampleInputEmail1">Email address</label> 
+			<input
+				type="text" class="form-control" id="exampleInputEmail1"
+				aria-describedby="emailHelp" placeholder="Enter email" name="name" required> <small
+				id="emailHelp" class="form-text text-muted">This was a test form for Web Service API test.</small>
+		</div>
+		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
+
+	<footer class="container-fluid bg-dark" style="min-height: 35vh;">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="nav">
+					<li class="nav-item"><a class="nav-link active" href="#">facebook</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">instagram</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+					<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</footer>
 </body>
 
 
