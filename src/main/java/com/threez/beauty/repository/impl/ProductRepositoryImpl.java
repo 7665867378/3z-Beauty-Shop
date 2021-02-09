@@ -18,6 +18,10 @@ public class ProductRepositoryImpl {
 		return this.productRepository.findAll();
 	}
 	
+	public Product getProduct(Integer productId) {
+		return this.productRepository.findById(productId).get();
+	}
+	
 	public Product saveProduct(Product product) {
 		return this.productRepository.save(product);
 	}
