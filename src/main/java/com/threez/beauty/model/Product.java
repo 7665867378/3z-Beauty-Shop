@@ -1,11 +1,21 @@
 package com.threez.beauty.model;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.threez.beauty.enums.Unit;
@@ -27,6 +37,25 @@ public class Product {
 	private String image;
 	private String thumbnail;
 	private Integer stock;
+	
+	@OneToMany(
+			mappedBy = "product",
+			cascade = CascadeType.ALL,
+			orphanRemoval = true
+	)
+	private List<Category> categoryList = new ArrayList<Category>();
+	
+	@ManyToMany(
+			cascade = {
+					CascadeType.PERSIST,
+					CascadeType.MERGE
+    })
+	@JoinTable(
+			name = "productShoppingCart",
+			joinColumns = @JoinColumn(name = "productId"),
+			inverseJoinColumns = @JoinColumn(name="shoppingCartID")
+	)
+	private Set<ShoppingCart> shoppingCartList = new HashSet<ShoppingCart>();
 	
 	public Product() {
 		super();
@@ -98,13 +127,31 @@ public class Product {
 	public void setStock(Integer stock) {
 		this.stock = stock;
 	}
-	
+	public List<Category> getCategoryList() {
+		return categoryList;
+	}
+	public void setCategoryList(List<Category> categoryList) {
+		this.categoryList = categoryList;
+	}
 	@Override
 	public String toString() {
-		return "Product [productId=" + productId + ", sku=" + sku + ", name=" + name + ", unit=" + unit + ", unitPrice="
-				+ unitPrice + ", weight=" + weight + ", size=" + size + ", image=" + image + ", thumbnail=" + thumbnail
-				+ ", stock=" + stock + "]";
+		return "Product [productId=" + productId + ", sku=" + sku + ", name=" + name + ", description=" + description
+				+ ", unit=" + unit + ", unitPrice=" + unitPrice + ", weight=" + weight + ", size=" + size + ", image="
+				+ image + ", thumbnail=" + thumbnail + ", stock=" + stock + ", categoryList=" + categoryList + "]";
 	}
-	
+	public void addProduct(Product product) {
+		this.productId = product.productId;
+		this.sku = product.sku;
+		this.name = product.name;
+		this.description = product.description;
+		this.unit = product.unit;
+		this.unitPrice = product.unitPrice;
+		this.weight = product.weight;
+		this.size = product.size;
+		this.image = product.image;
+		this.thumbnail = product.thumbnail;
+		this.stock = product.stock;
+		this.categoryList = product.categoryList;
+	}
 	
 }
