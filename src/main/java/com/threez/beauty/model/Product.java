@@ -38,12 +38,18 @@ public class Product {
 	private String thumbnail;
 	private Integer stock;
 	
-	@OneToMany(
-			mappedBy = "product",
-			cascade = CascadeType.ALL,
-			orphanRemoval = true
+	@ManyToMany(
+			cascade = {
+					CascadeType.PERSIST,
+					CascadeType.MERGE
+			}
 	)
-	private List<Category> categoryList = new ArrayList<Category>();
+	@JoinTable(
+			name = "productCategory",
+			joinColumns = @JoinColumn(name = "productId"),
+			inverseJoinColumns = @JoinColumn(name = "categoryId")
+	)
+	private Set<Category> categoryList = new HashSet<Category>();
 	
 	@ManyToMany(
 			cascade = {
@@ -127,31 +133,24 @@ public class Product {
 	public void setStock(Integer stock) {
 		this.stock = stock;
 	}
-	public List<Category> getCategoryList() {
+	public Set<Category> getCategoryList() {
 		return categoryList;
 	}
-	public void setCategoryList(List<Category> categoryList) {
+	public void setCategoryList(Set<Category> categoryList) {
 		this.categoryList = categoryList;
+	}
+	public Set<ShoppingCart> getShoppingCartList() {
+		return shoppingCartList;
+	}
+	public void setShoppingCartList(Set<ShoppingCart> shoppingCartList) {
+		this.shoppingCartList = shoppingCartList;
 	}
 	@Override
 	public String toString() {
 		return "Product [productId=" + productId + ", sku=" + sku + ", name=" + name + ", description=" + description
 				+ ", unit=" + unit + ", unitPrice=" + unitPrice + ", weight=" + weight + ", size=" + size + ", image="
-				+ image + ", thumbnail=" + thumbnail + ", stock=" + stock + ", categoryList=" + categoryList + "]";
-	}
-	public void addProduct(Product product) {
-		this.productId = product.productId;
-		this.sku = product.sku;
-		this.name = product.name;
-		this.description = product.description;
-		this.unit = product.unit;
-		this.unitPrice = product.unitPrice;
-		this.weight = product.weight;
-		this.size = product.size;
-		this.image = product.image;
-		this.thumbnail = product.thumbnail;
-		this.stock = product.stock;
-		this.categoryList = product.categoryList;
+				+ image + ", thumbnail=" + thumbnail + ", stock=" + stock + ", categoryList=" + categoryList
+				+ ", shoppingCartList=" + shoppingCartList + "]";
 	}
 	
 }

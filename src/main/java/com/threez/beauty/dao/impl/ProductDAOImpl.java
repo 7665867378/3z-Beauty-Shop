@@ -37,14 +37,7 @@ public class ProductDAOImpl implements ProductDAO{
 
 	@Override
 	public Product save(Product object) {
-		try {
-			if(!this.productRepository.existsById(object.getProductId())) {
-				this.productRepository.save(object);
-				return object;
-			}
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-		}
+		this.productRepository.save(object);
 		return object;
 	}
 
@@ -66,6 +59,7 @@ public class ProductDAOImpl implements ProductDAO{
 				oldProduct.setImage(updatedProduct.getImage());
 				oldProduct.setStock(updatedProduct.getStock());
 				this.productRepository.save(oldProduct);
+				return oldProduct;
 			}
 		} catch (NullPointerException e) {
 			// TODO: handle exception
@@ -77,6 +71,12 @@ public class ProductDAOImpl implements ProductDAO{
 	public Product delete(Product object) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Product getById(Integer id) {
+		// TODO Auto-generated method stub
+		return this.productRepository.findById(id).get();
 	}
 
 

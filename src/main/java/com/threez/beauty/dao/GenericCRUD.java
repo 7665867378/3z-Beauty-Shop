@@ -10,6 +10,7 @@ public interface GenericCRUD<E> {
 	
 	List<E> getAll();
 	E get(E object);
+	E getById(Integer id);
 	E save(E object);
 	E update(E object);
 	E delete(E object);

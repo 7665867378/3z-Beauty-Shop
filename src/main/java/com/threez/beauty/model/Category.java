@@ -1,10 +1,18 @@
 package com.threez.beauty.model;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -12,7 +20,7 @@ import javax.persistence.Table;
 public class Category {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long categoryId;
 	private String name;
 	
@@ -20,9 +28,9 @@ public class Category {
 	
 	private String thumbnail;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Product product;
-
+	@ManyToMany( mappedBy="categoryList")
+	private Set<Product> productList = new HashSet<Product>();
+	
 	public Long getCategoryId() {
 		return categoryId;
 	}
@@ -55,10 +63,19 @@ public class Category {
 		this.thumbnail = thumbnail;
 	}
 
+	public Set<Product> getProductList() {
+		return productList;
+	}
+
+	public void setProductList(Set<Product> productList) {
+		this.productList = productList;
+	}
+
 	@Override
 	public String toString() {
 		return "Category [categoryId=" + categoryId + ", name=" + name + ", description=" + description + ", thumbnail="
-				+ thumbnail + "]";
+				+ thumbnail + ", productList=" + productList + "]";
 	}
+	
 	
 }
