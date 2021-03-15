@@ -11,9 +11,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -24,7 +29,17 @@ public class ShoppingCart {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer shoppingCartID;
 	
-	@ManyToMany(mappedBy = "shoppingCartList")
+	
+	@JsonIgnore // It removes the Cannot call sendError()
+	@OneToMany(
+			fetch = FetchType.LAZY,
+			cascade = {CascadeType.ALL
+						})
+	@JoinTable(
+			name = "productShoppingCart",
+			joinColumns = @JoinColumn(name = "shoppingCartID"),
+			inverseJoinColumns = @JoinColumn(name="productId")
+	)
 	private Set<Product> productList = new HashSet<Product>();
 	
 	private Short quantity;
@@ -81,9 +96,11 @@ public class ShoppingCart {
 	
 	public void addProduct(Product product) {
 		// TODO:
+		this.productList.add(product);
 	}
 	
 	public void removeProduct(Product product) {
+		this.productList.remove(product);
 		// TODO:
 	}
 	

@@ -1,6 +1,7 @@
 package com.threez.beauty.dao.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,4 +58,9 @@ public class CategoryDAOImpl implements CategoryDAO{
 		return null;
 	}
 
+	@Override
+	public Set<Category> getDistinctCategoryByName(String name) {
+		return this.categoryRepository.findDistinctByName(name);
+	}
+	
 }

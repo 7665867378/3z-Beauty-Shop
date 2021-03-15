@@ -3,6 +3,7 @@ package com.threez.beauty.controller;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -49,5 +50,13 @@ public class CategoryController {
 		
 		this.categoryDAO.save(category);
 		return new ResponseEntity<>(category,HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/distinct-name/{name}")
+	private HttpEntity<Set<Category>> getDistinctCategory(@PathVariable String name){
+		
+		Set<Category> distinctCategoryList = this.categoryDAO.getDistinctCategoryByName(name);
+		
+		return new ResponseEntity<>(distinctCategoryList,HttpStatus.OK);
 	}
 }
